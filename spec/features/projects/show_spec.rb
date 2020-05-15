@@ -57,36 +57,114 @@ RSpec.describe "the Projects show page" do
 
     visit "/projects/#{@boardfit.id}"
     within("#projects-#{@boardfit.id}")do
-    expect(page).to have_content("Project Name: #{@boardfit.name}")
-    expect(page).to have_content("Material: #{@boardfit.material}")
-    expect(page).to have_content("Challenge Theme: #{@boardfit.challenge.theme}")
-    expect(page).to have_content("Number of Contestants: #{@boardfit.contestant_count}")
+      expect(page).to have_content("Project Name: #{@boardfit.name}")
+      expect(page).to have_content("Material: #{@boardfit.material}")
+      expect(page).to have_content("Challenge Theme: #{@boardfit.challenge.theme}")
+      expect(page).to have_content("Number of Contestants: #{@boardfit.contestant_count}")
     end
 
     visit "/projects/#{@upholstery_tux.id}"
     within("#projects-#{@upholstery_tux.id}")do
-    expect(page).to have_content("Project Name: #{@upholstery_tux.name}")
-    expect(page).to have_content("Material: #{@upholstery_tux.material}")
-    expect(page).to have_content("Challenge Theme: #{@upholstery_tux.challenge.theme}")
-    expect(page).to have_content("Number of Contestants: #{@upholstery_tux.contestant_count}")
-    end
-    visit "/projects/#{@lit_fit.id}"
-    within("#projects-#{@lit_fit.id}")do
-    expect(page).to have_content("Project Name: Litfit")
-    expect(page).to have_content("Material: Lamp")
-    expect(page).to have_content("Challenge Theme: Apartment Furnishings")
-    expect(page).to have_content("Number of Contestants: 0")
+      expect(page).to have_content("Project Name: #{@upholstery_tux.name}")
+      expect(page).to have_content("Material: #{@upholstery_tux.material}")
+      expect(page).to have_content("Challenge Theme: #{@upholstery_tux.challenge.theme}")
+      expect(page).to have_content("Number of Contestants: #{@upholstery_tux.contestant_count}")
     end
 
+    visit "/projects/#{@lit_fit.id}"
+    within("#projects-#{@lit_fit.id}")do
+      expect(page).to have_content("Project Name: Litfit")
+      expect(page).to have_content("Material: Lamp")
+      expect(page).to have_content("Challenge Theme: Apartment Furnishings")
+      expect(page).to have_content("Number of Contestants: 0")
+    end
+
+  end
+
+  it "returns average age of contesants on project (2 decimal)" do
+    visit "/projects/#{@news_chic.id}"
+
+    within("#projects-#{@news_chic.id}")do
+      expect(page).to have_content("Project Name: #{@news_chic.name}")
+      expect(page).to have_content("Material: #{@news_chic.material}")
+      expect(page).to have_content("Challenge Theme: #{@news_chic.challenge.theme}")
+      expect(page).to have_content("Number of Contestants: #{@news_chic.contestant_count}")
+      expect(page).to have_content("Average Contestant Experience: #{@news_chic.average_experience}")
+    end
+
+    visit "/projects/#{@boardfit.id}"
+    within("#projects-#{@boardfit.id}")do
+      expect(page).to have_content("Project Name: #{@boardfit.name}")
+      expect(page).to have_content("Material: #{@boardfit.material}")
+      expect(page).to have_content("Challenge Theme: #{@boardfit.challenge.theme}")
+      expect(page).to have_content("Number of Contestants: #{@boardfit.contestant_count}")
+      expect(page).to have_content("Average Contestant Experience: #{@boardfit.average_experience}")
+    end
+
+    visit "/projects/#{@upholstery_tux.id}"
+    within("#projects-#{@upholstery_tux.id}")do
+      expect(page).to have_content("Project Name: #{@upholstery_tux.name}")
+      expect(page).to have_content("Material: #{@upholstery_tux.material}")
+      expect(page).to have_content("Challenge Theme: #{@upholstery_tux.challenge.theme}")
+      expect(page).to have_content("Number of Contestants: #{@upholstery_tux.contestant_count}")
+      expect(page).to have_content("Average Contestant Experience: #{@upholstery_tux.average_experience}")
+    end
+
+    visit "/projects/#{@lit_fit.id}"
+    within("#projects-#{@lit_fit.id}")do
+      expect(page).to have_content("Project Name: Litfit")
+      expect(page).to have_content("Material: Lamp")
+      expect(page).to have_content("Challenge Theme: Apartment Furnishings")
+      expect(page).to have_content("Number of Contestants: 0")
+      expect(page).to have_content("Average Contestant Experience: n/a")
+    end
+
+  end
+
+  it "can add contestant to project through a form" do
+      visit "/projects/#{@news_chic.id}"
+
+      within("#projects-#{@news_chic.id}")do
+        expect(page).to have_content("Project Name: #{@news_chic.name}")
+        expect(page).to have_content("Material: #{@news_chic.material}")
+        expect(page).to have_content("Challenge Theme: #{@news_chic.challenge.theme}")
+        expect(page).to have_content("Number of Contestants: 2")
+        expect(page).to have_content("Average Contestant Experience: #{@news_chic.average_experience}")
+      end
+
+      within("#add-contestant-form")do
+        fill_in :name, with: "Queen Elizabeth"
+        fill_in :age, with: "99"
+        fill_in :hometown, with: "London"
+        fill_in :years_of_experience, with: "70"
+        click_button "Add Contestant"
+      end
+      @queen = Contestant.last
+
+      within("#projects-#{@news_chic.id}")do
+        expect(page).to have_content("Project Name: #{@news_chic.name}")
+        expect(page).to have_content("Material: #{@news_chic.material}")
+        expect(page).to have_content("Challenge Theme: #{@news_chic.challenge.theme}")
+        expect(page).to have_content("Number of Contestants: 3")
+        expect(page).to have_content("Average Contestant Experience: #{@news_chic.average_experience}")
+      end
+
+      visit "/contestants"
+      within("#contestant-#{@queen.id}")do
+        expect(page).to have_content("Name: Queen Elizabeth")
+        expect(page).to have_content("Projects: News Chic")
+      end
 
   end
 end
 
-# User Story 3 of 3
+# User Story Extension 2 - Adding a contestant to a project
 # As a visitor,
 # When I visit a project's show page
-# I see a count of the number of contestants on this project
-# (e.g.    Litfit
-#     Material: Lamp Shade
-#   Challenge Theme: Apartment Furnishings
-#   Number of Contestants: 3 )
+# I see a form to add a contestant to this project
+# When I fill out a field with an existing contestants id
+# And hit "Add Contestant To Project"
+# I'm taken back to the project's show page
+# And I see that the number of contestants has increased by 1
+# And when I visit the contestants index page
+# I see that project listed under that contestant's name

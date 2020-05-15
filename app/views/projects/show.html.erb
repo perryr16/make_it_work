@@ -3,5 +3,19 @@
   <p>Material: <%= @project.material %></p>
   <p>Challenge Theme: <%= @project.challenge.theme %></p>
   <p>Number of Contestants: <%= @project.contestant_count %></p>
+  <p>Average Contestant Experience: <%= @project.average_experience %></p>
+</section>
+<section id="add-contestant-form">
 
+  <%= form_tag "/projects/#{@project.id}" do %>
+    <%= label_tag :name %>
+    <%= text_field_tag :name %>
+    <%= label_tag :age %>
+    <%= text_field_tag :age %>
+    <%= label_tag :hometown %>
+    <%= text_field_tag :hometown %>
+    <%= label_tag :years_of_experience %>
+    <%= text_field_tag :years_of_experience %>
+    <%= submit_tag "Add Contestant" %>
+  <% end %>
 </section>
