@@ -30,7 +30,7 @@ RSpec.describe "the Projects show page" do
     visit "/projects/#{@news_chic.id}"
 
     within("#projects-#{@news_chic.id}")do
-      expect(page).to have_content("Project Name: News Chic")
+      expect(page).to have_content("News Chic")
       expect(page).to have_content("Material: Newspaper")
       expect(page).to have_content("Challenge Theme: Recycled Material")
     end
@@ -38,7 +38,7 @@ RSpec.describe "the Projects show page" do
     visit "/projects/#{@lit_fit.id}"
 
     within("#projects-#{@lit_fit.id}")do
-      expect(page).to have_content("Project Name: Litfit")
+      expect(page).to have_content("Litfit")
       expect(page).to have_content("Material: Lamp")
       expect(page).to have_content("Challenge Theme: Apartment Furnishings")
     end
@@ -49,7 +49,7 @@ RSpec.describe "the Projects show page" do
     visit "/projects/#{@news_chic.id}"
 
     within("#projects-#{@news_chic.id}")do
-      expect(page).to have_content("Project Name: #{@news_chic.name}")
+      expect(page).to have_content("#{@news_chic.name}")
       expect(page).to have_content("Material: #{@news_chic.material}")
       expect(page).to have_content("Challenge Theme: #{@news_chic.challenge.theme}")
       expect(page).to have_content("Number of Contestants: #{@news_chic.contestant_count}")
@@ -57,7 +57,7 @@ RSpec.describe "the Projects show page" do
 
     visit "/projects/#{@boardfit.id}"
     within("#projects-#{@boardfit.id}")do
-      expect(page).to have_content("Project Name: #{@boardfit.name}")
+      expect(page).to have_content("#{@boardfit.name}")
       expect(page).to have_content("Material: #{@boardfit.material}")
       expect(page).to have_content("Challenge Theme: #{@boardfit.challenge.theme}")
       expect(page).to have_content("Number of Contestants: #{@boardfit.contestant_count}")
@@ -65,7 +65,7 @@ RSpec.describe "the Projects show page" do
 
     visit "/projects/#{@upholstery_tux.id}"
     within("#projects-#{@upholstery_tux.id}")do
-      expect(page).to have_content("Project Name: #{@upholstery_tux.name}")
+      expect(page).to have_content("#{@upholstery_tux.name}")
       expect(page).to have_content("Material: #{@upholstery_tux.material}")
       expect(page).to have_content("Challenge Theme: #{@upholstery_tux.challenge.theme}")
       expect(page).to have_content("Number of Contestants: #{@upholstery_tux.contestant_count}")
@@ -73,7 +73,7 @@ RSpec.describe "the Projects show page" do
 
     visit "/projects/#{@lit_fit.id}"
     within("#projects-#{@lit_fit.id}")do
-      expect(page).to have_content("Project Name: Litfit")
+      expect(page).to have_content("Litfit")
       expect(page).to have_content("Material: Lamp")
       expect(page).to have_content("Challenge Theme: Apartment Furnishings")
       expect(page).to have_content("Number of Contestants: 0")
@@ -85,7 +85,7 @@ RSpec.describe "the Projects show page" do
     visit "/projects/#{@news_chic.id}"
 
     within("#projects-#{@news_chic.id}")do
-      expect(page).to have_content("Project Name: #{@news_chic.name}")
+      expect(page).to have_content("#{@news_chic.name}")
       expect(page).to have_content("Material: #{@news_chic.material}")
       expect(page).to have_content("Challenge Theme: #{@news_chic.challenge.theme}")
       expect(page).to have_content("Number of Contestants: #{@news_chic.contestant_count}")
@@ -94,7 +94,7 @@ RSpec.describe "the Projects show page" do
 
     visit "/projects/#{@boardfit.id}"
     within("#projects-#{@boardfit.id}")do
-      expect(page).to have_content("Project Name: #{@boardfit.name}")
+      expect(page).to have_content("#{@boardfit.name}")
       expect(page).to have_content("Material: #{@boardfit.material}")
       expect(page).to have_content("Challenge Theme: #{@boardfit.challenge.theme}")
       expect(page).to have_content("Number of Contestants: #{@boardfit.contestant_count}")
@@ -103,7 +103,7 @@ RSpec.describe "the Projects show page" do
 
     visit "/projects/#{@upholstery_tux.id}"
     within("#projects-#{@upholstery_tux.id}")do
-      expect(page).to have_content("Project Name: #{@upholstery_tux.name}")
+      expect(page).to have_content("#{@upholstery_tux.name}")
       expect(page).to have_content("Material: #{@upholstery_tux.material}")
       expect(page).to have_content("Challenge Theme: #{@upholstery_tux.challenge.theme}")
       expect(page).to have_content("Number of Contestants: #{@upholstery_tux.contestant_count}")
@@ -112,7 +112,7 @@ RSpec.describe "the Projects show page" do
 
     visit "/projects/#{@lit_fit.id}"
     within("#projects-#{@lit_fit.id}")do
-      expect(page).to have_content("Project Name: Litfit")
+      expect(page).to have_content("Litfit")
       expect(page).to have_content("Material: Lamp")
       expect(page).to have_content("Challenge Theme: Apartment Furnishings")
       expect(page).to have_content("Number of Contestants: 0")
@@ -125,7 +125,7 @@ RSpec.describe "the Projects show page" do
       visit "/projects/#{@news_chic.id}"
 
       within("#projects-#{@news_chic.id}")do
-        expect(page).to have_content("Project Name: #{@news_chic.name}")
+        expect(page).to have_content("#{@news_chic.name}")
         expect(page).to have_content("Material: #{@news_chic.material}")
         expect(page).to have_content("Challenge Theme: #{@news_chic.challenge.theme}")
         expect(page).to have_content("Number of Contestants: 2")
@@ -142,7 +142,7 @@ RSpec.describe "the Projects show page" do
       @queen = Contestant.last
 
       within("#projects-#{@news_chic.id}")do
-        expect(page).to have_content("Project Name: #{@news_chic.name}")
+        expect(page).to have_content("#{@news_chic.name}")
         expect(page).to have_content("Material: #{@news_chic.material}")
         expect(page).to have_content("Challenge Theme: #{@news_chic.challenge.theme}")
         expect(page).to have_content("Number of Contestants: 3")
