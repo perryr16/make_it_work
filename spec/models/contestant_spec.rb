@@ -43,4 +43,5 @@ RSpec.describe Contestant, type: :model do
     expect(@erin.project_list).to eq("Boardfit")
 
   end
+  
 end
