@@ -1,7 +1,7 @@
 <h1>Contestants</h1>
 
 <% @contestants.each do |contestant| %>
-  <section id="contestant-<%= contestant.id %>">
+  <section id="contestant-<%= contestant.id %>" class="border">
     <h3><%= contestant.name %> </h3>
     <p>Projects: <%= contestant.project_list %> </p>
   </section>

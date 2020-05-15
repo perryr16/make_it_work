@@ -1,21 +1,21 @@
-<section id="projects-<%= @project.id %>">
+<section id="projects-<%= @project.id %>" class="border">
   <h1><%= @project.name %></h1>
   <p>Material: <%= @project.material %></p>
   <p>Challenge Theme: <%= @project.challenge.theme %></p>
   <p>Number of Contestants: <%= @project.contestant_count %></p>
   <p>Average Contestant Experience: <%= @project.average_experience %></p>
 </section>
-<section id="add-contestant-form">
+<section id="add-contestant-form" class="border">
 
   <%= form_tag "/projects/#{@project.id}" do %>
-    <%= label_tag :name %>
-    <%= text_field_tag :name %>
-    <%= label_tag :age %>
-    <%= text_field_tag :age %>
-    <%= label_tag :hometown %>
-    <%= text_field_tag :hometown %>
-    <%= label_tag :years_of_experience %>
-    <%= text_field_tag :years_of_experience %>
-    <%= submit_tag "Add Contestant" %>
+    <%= label_tag :name %><br>
+    <%= text_field_tag :name %><br><br>
+    <%= label_tag :age %><br>
+    <%= text_field_tag :age %><br><br>
+    <%= label_tag :hometown %><br>
+    <%= text_field_tag :hometown %><br><br>
+    <%= label_tag :years_of_experience %><br>
+    <%= text_field_tag :years_of_experience %><br><br>
+    <%= submit_tag "Add Contestant", class: "mint hover"%><br>
   <% end %>
 </section>
