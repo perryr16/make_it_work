@@ -1,20 +1,8 @@
 require 'rails_helper'
 
+RSpec.describe "the Contestant index page" do
 
-RSpec.describe Contestant, type: :model do
-  describe "validations" do
-    it {should validate_presence_of :name}
-    it {should validate_presence_of :age}
-    it {should validate_presence_of :hometown}
-    it {should validate_presence_of :years_of_experience}
-  end
-
-  describe "relationships" do
-    it {should have_many :contestant_projects}
-    it {should have_many(:projects).through(:contestant_projects)}
-  end
-
-  it "lists projects" do
+  before :each do
     @recycled_material_challenge = Challenge.create(theme: "Recycled Material", project_budget: 1000)
     @furniture_challenge = Challenge.create(theme: "Apartment Furnishings", project_budget: 1000)
 
@@ -37,10 +25,28 @@ RSpec.describe Contestant, type: :model do
     ContestantProject.create(contestant_id: @kentaro.id, project_id: @boardfit.id)
     ContestantProject.create(contestant_id: @erin.id, project_id: @boardfit.id)
 
-    expect(@gretchen.project_list).to eq("News Chic, Upholstery Tuxedo")
-    expect(@jay.project_list).to eq("News Chic")
-    expect(@kentaro.project_list).to eq("Boardfit, Upholstery Tuxedo")
-    expect(@erin.project_list).to eq("Boardfit")
+  end
+
+  it "lists names of contestants and their projects" do
+    visit '/contestants'
+
+    within("#contestant-#{@jay.id}")do
+      expect(page).to have_content("Name: #{@jay.name}")
+      expect(page).to have_content("Projects: #{@jay.project_list}")
+    end
+    within("#contestant-#{@gretchen.id}")do
+      expect(page).to have_content("Name: #{@gretchen.name}")
+      expect(page).to have_content("Projects: #{@gretchen.project_list}")
+    end
+    within("#contestant-#{@kentaro.id}")do
+      expect(page).to have_content("Name: #{@kentaro.name}")
+      expect(page).to have_content("Projects: #{@kentaro.project_list}")
+    end
+    within("#contestant-#{@erin.id}")do
+      expect(page).to have_content("Name: #{@erin.name}")
+      expect(page).to have_content("Projects: #{@erin.project_list}")
+    end
 
   end
+
 end
